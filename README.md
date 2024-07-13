@@ -1,1 +1,2 @@
-Bookbot is my first project
+Bookbot is my first project which is a program that takes a text file and counts all the words in the file,
+it then sorts the words by the number of times they appear in the file and prints the results to the console.
