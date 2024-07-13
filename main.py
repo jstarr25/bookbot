@@ -3,8 +3,20 @@ def main():
      file_contents = read_file(path)
      total_words = count_words(file_contents)
      letters = letter_count(file_contents)
-     letter_list = dict_to_list(letters)
-     print(letter_list)
+     sorted_list = dict_to_list(letters)
+     
+     print(f"--- Begin report of {path} ---")
+     print(f"{total_words} words found in the document")
+     print()
+
+     for letter in sorted_list:
+         if not letter["letter"].isalpha():
+             continue
+         print(f"The '{letter['letter']}' character appears {letter['count']} times")
+         
+     print()
+     print("--- End report ---")
+
     
 def read_file(path):
     with open(path) as f:
@@ -25,8 +37,14 @@ def letter_count(file_contents):
             letters[letter] = 1
      return letters
 
-def dict_to_list(letters):
-    lists = [{"letter": letter, "count": count} for letter, count in letters.items()]
-    return lists
+def sort_on(dictionary):
+    return dictionary["count"]
+
+def dict_to_list(nums_char_dict):
+     sorted_list = []
+     for letter, count in nums_char_dict.items():
+        sorted_list.append({"letter": letter, "count": count})
+     sorted_list.sort(key=sort_on, reverse=True)
+     return sorted_list
 
 main()
